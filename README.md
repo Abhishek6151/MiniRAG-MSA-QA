@@ -1,16 +1,4 @@
-Setup
-Clone or download the repository.
-Install the required dependencies:
-pip install -r requirements.txt
-Create a .env file in the project root directory.
 
-Example:
-
-GEMINI_API_KEY=your_gemini_api_key
-Run the Streamlit application:
-streamlit run app.py
-
-Note: The Gemini API key is not included in this repository for security reasons. A valid API key must be added to the .env file before running the application.
 #### **MiniRAG – MSA Contract Q\&A System**
 
 
@@ -18,7 +6,19 @@ Note: The Gemini API key is not included in this repository for security reasons
 A RAG-based Q\&A system built on the Salesforce Master Services Agreement. Upload the contract, ask questions in plain English, and get answers backed by retrieved evidence from the document.
 
 
+#### **Setup**
+Clone or download the repository.
+Install the required dependencies:
+pip install -r requirements.txt
+Create a .env file in the project root directory.
 
+#### **Example:**
+
+GEMINI_API_KEY=your_gemini_api_key
+Run the Streamlit application:
+streamlit run app.py
+
+Note: The Gemini API key is not included in this repository for security reasons. A valid API key must be added to the .env file before running the application.
 
 
 ###### **MSA Used**
