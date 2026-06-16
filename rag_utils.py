@@ -10,7 +10,7 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-3.1-flash-lite")
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
-
+# extract text from PDF and create chunks
 def process_pdf(pdf_path):
     reader = PdfReader(pdf_path)
     chunk_size = 800
