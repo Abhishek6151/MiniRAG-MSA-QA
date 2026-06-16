@@ -38,7 +38,7 @@ def create_collection_from_pdf(pdf_path):
     client = chromadb.Client()
     try:
         client.delete_collection("contract_collection")
-    except ValueError:
+    except Exception:
         pass
 
     collection = client.create_collection(name="contract_collection")
