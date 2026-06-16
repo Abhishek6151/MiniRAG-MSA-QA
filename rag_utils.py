@@ -5,12 +5,13 @@ import google.generativeai as genai
 import re
 import os
 from dotenv import load_dotenv
+#load Gemini API key
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-3.1-flash-lite")
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
-def create_collection_from_pdf(pdf_path):
+def process_pdf(pdf_path):
     reader = PdfReader(pdf_path)
     chunk_size = 800
     chunk_overlap = 150
@@ -33,6 +34,7 @@ def create_collection_from_pdf(pdf_path):
             start = end - chunk_overlap
 
     chunk_texts = [item["text"] for item in page_chunks]
+#generate embeddings
     chunk_embeddings = embedding_model.encode(chunk_texts, show_progress_bar=False)
 
     client = chromadb.Client()
@@ -40,7 +42,7 @@ def create_collection_from_pdf(pdf_path):
         client.delete_collection("contract_collection")
     except Exception:
         pass
-
+# store chunk vectors in ChromaDB
     collection = client.create_collection(name="contract_collection")
     collection.add(
         embeddings=chunk_embeddings.tolist(),
@@ -50,7 +52,7 @@ def create_collection_from_pdf(pdf_path):
     )
     return collection
 
-
+# retrieve top 5 matching chunks for a question
 def retrieve_chunks(question, collection, top_k=5):
     question_embedding = embedding_model.encode(question)
     results = collection.query(
@@ -58,7 +60,7 @@ def retrieve_chunks(question, collection, top_k=5):
         n_results=top_k
     )
     return results
-
+# combine retrieved chunks into a single context
 def build_context(results):
     context = ""
     for chunk in results["documents"][0]:
@@ -80,7 +82,7 @@ def generate_answer(question, context):
     """
     response = model.generate_content(prompt,generation_config=genai.types.GenerationConfig(temperature=0))
     return response.text
-
+#use Gemini as a judge
 def judge_answer(expected_answer, system_answer):
     judge_prompt = f"""
 You are evaluating a RAG system's answer against a ground truth answer extracted from a contract document.
