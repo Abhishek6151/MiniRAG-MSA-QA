@@ -146,3 +146,12 @@ Google Gemini API
 
 pandas
 
+
+** Project Files**
+
+MiniRAG.ipynb – Development notebook used for PDF extraction, chunking experiments, embedding generation, retrieval testing, and evaluation analysis.
+rag_utils.py – Core RAG pipeline functions including chunking, retrieval, answer generation, and evaluation.
+app.py` – Streamlit user interface for contract question answering and automated evaluation.
+ground_truth.json – Benchmark questions and expected answers used for evaluation.
+requirements.txt – Python dependencies required to run the project.
+
