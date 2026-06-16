@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import time
 from rag_utils import (
-    create_collection_from_pdf,
+    process_pdf,
     retrieve_chunks,
     build_context,
     generate_answer,
@@ -27,7 +27,7 @@ if uploaded_file is not None:
     pdf_path = uploaded_file.name
     with open(pdf_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
-    collection = create_collection_from_pdf(pdf_path)
+    collection =process_pdf(pdf_path)
 submit_btn = st.button("Submit Question")
 evaluate_btn = st.button("Run Evaluation")
 if uploaded_file is not None and submit_btn:
@@ -63,10 +63,12 @@ if uploaded_file is not None and submit_btn:
         })
     report_df = pd.DataFrame(report_data)
     report_df.index = range(1, len(report_df) + 1)
+    # generate answer using retrieved context
     context = build_context(results)
     answer = generate_answer(question, context)
     st.session_state.answer = answer
     st.session_state.report_df = report_df
+# run evaluation on all benchmark questions    
 if uploaded_file is not None and evaluate_btn:
     st.info("Running automated evaluation on 10 benchmark questions...")
     evaluation_results = []
@@ -82,6 +84,7 @@ if uploaded_file is not None and evaluate_btn:
             "system_answer": system_answer
         })
     judged_results = []
+    # compare system answers against ground truth
     for item in evaluation_results:
         judge_output = judge_answer(item["expected_answer"], item["system_answer"]).strip()
         time.sleep(4)  
