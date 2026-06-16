@@ -1,0 +1,64 @@
+[
+  {
+    "category": "Payment Terms",
+    "question": "When is an invoice due after it is issued?",
+    "expected_answer": "Payment is due within 30 days of the invoice date, unless the Order Form says something different.",
+    "source_page": 5
+  },
+  {
+    "category": "Late Payment Penalty",
+    "question": "Is there a penalty for late payment and what is the rate?",
+    "expected_answer": "Yes, late payments can be charged interest at 1.5% per month or the legal maximum, whichever is lower.",
+    "source_page": 5
+  },
+  {
+    "category": "Delivery Deadline Penalty",
+    "question": "What is the penalty for the provider missing a delivery milestone?",
+    "expected_answer": "There is no delivery milestone penalty in this contract. Salesforce is a subscription service, not a project delivery contract, so no such clause exists.",
+    "source_page": null
+  },
+  {
+    "category": "Termination Conditions",
+    "question": "Under what conditions can either party terminate this agreement?",
+    "expected_answer": "Either side can terminate if the other party has a material breach and does not fix it within 30 days of being notified, or if they go bankrupt or insolvent.",
+    "source_page": 8
+  },
+  
+  {
+    "category": "Termination Notice Period",
+    "question": "How many days notice must be given before a subscription automatically renews for another term?",
+    "expected_answer": "You need to give at least 30 days written notice before the subscription term ends, otherwise it auto-renews for another year.",
+    "source_page": 8
+  },
+  {
+    "category": "Limitation of Liability",
+    "question": "What is the maximum liability cap defined in this contract?",
+    "expected_answer": "Neither side can be held liable for more than what the customer actually paid for the services in the 12 months before the issue occurred.",
+    "source_page": 8
+  },
+  {
+    "category": "Intellectual Property",
+    "question": "Who retains ownership of intellectual property under this agreement?",
+    "expected_answer": "Salesforce keeps ownership of everything related to their services and platform. The customer keeps ownership of their own data.",
+    "source_page": 7
+  },
+  {
+    "category": "Confidentiality Duration",
+    "question": "Which sections survive termination or expiration of this agreement?",
+    "expected_answer": "The confidentiality obligations survive termination with no fixed end date as stated in the Surviving Provisions section.",
+    "source_page": 8
+  },
+  
+  {
+    "category": "Governing Law",
+    "question": "What is the governing law and venue for Salesforce customers in the United States or Americas?",
+    "expected_answer": "California law applies with exclusive jurisdiction in San Francisco courts for customers in the Americas other than Brazil or Canada.",
+    "source_page": 10
+  },
+  {
+    "category": "Dispute Resolution",
+    "question": "What is the dispute resolution process for customers domiciled in India?",
+    "expected_answer": "Both sides first try to sort it out informally within 10 business days. If that does not work, it goes to a 3-person arbitration panel in Bengaluru under Indian arbitration law.",
+    "source_page": 15
+  }
+]
