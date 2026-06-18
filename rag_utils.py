@@ -40,7 +40,7 @@ def process_pdf(pdf_path):
     client = chromadb.Client()
     try:
         client.delete_collection("contract_collection")
-    except Exception:
+    except NotFoundError:
         pass
 # store chunk vectors in ChromaDB
     collection = client.create_collection(name="contract_collection")
