@@ -16,27 +16,19 @@ def process_pdf(pdf_path):
     chunk_size = 800
     chunk_overlap = 150
     page_chunks = []
-
     for page_num, page in enumerate(reader.pages, start=1):
         text = page.extract_text()
         if not text:
             continue
         text = re.sub(r"\s+", " ", text).strip()
-
         start = 0
         while start < len(text):
             end = start + chunk_size
-            page_chunks.append({
-                "text": text[start:end],
-                "page": page_num,
-                "location": f"Page {page_num}"
-            })
+            page_chunks.append({"text": text[start:end],"page": page_num,"location": f"Page {page_num}"})
             start = end - chunk_overlap
-
     chunk_texts = [item["text"] for item in page_chunks]
 #generate embeddings
     chunk_embeddings = embedding_model.encode(chunk_texts, show_progress_bar=False)
-
     client = chromadb.Client()
     try:
         client.delete_collection("contract_collection")
@@ -45,20 +37,13 @@ def process_pdf(pdf_path):
 # store chunk vectors in ChromaDB
     collection = client.create_collection(name="contract_collection")
     collection.add(
-        embeddings=chunk_embeddings.tolist(),
-        documents=chunk_texts,
-        metadatas=[{"page": item["page"], "location": item["location"]} for item in page_chunks],
-        ids=[f"chunk_{i}" for i in range(len(page_chunks))]
-    )
+        embeddings=chunk_embeddings.tolist(),documents=chunk_texts,metadatas=[{"page": item["page"], "location": item["location"]} for item in page_chunks],ids=[f"chunk_{i}" for i in range(len(page_chunks))])
     return collection
 
 # retrieve top 5 matching chunks for a question
 def retrieve_chunks(question, collection, top_k=5):
     question_embedding = embedding_model.encode(question)
-    results = collection.query(
-        query_embeddings=[question_embedding.tolist()],
-        n_results=top_k
-    )
+    results = collection.query(query_embeddings=[question_embedding.tolist()],n_results=top_k)
     return results
 # combine retrieved chunks into a single context
 def build_context(results):
