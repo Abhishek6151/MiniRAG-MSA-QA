@@ -162,8 +162,8 @@ pandas
 
  Project Files
 
-- `MiniRAG.ipynb` – Development notebook used for PDF extraction, chunking experiments, embedding generation, retrieval testing, and evaluation analysis.The notebook was used to build and test the RAG pipeline step by step. Once the workflow was working, the reusable functions were moved to rag_utils.py and connected to the Streamlit application.
-- `rag_utils.py` – Core RAG pipeline functions including chunking, retrieval, answer generation, and evaluation.
+- `MiniRAG.ipynb` – Development notebook used for PDF extraction, chunking experiments, embedding generation, retrieval testing, and evaluation analysis.The notebook was used to build and test the RAG pipeline step by step. Once the workflow was working, the reusable functions were moved to rag_pipeline.py and connected to the Streamlit application.
+- `rag_pipeline.py` – Core RAG pipeline functions including chunking, retrieval, answer generation, and evaluation.
 - `app.py` – Streamlit user interface for contract question answering and automated evaluation.
 - `ground_truth.json` – Benchmark questions and expected answers used for evaluation.
 - `requirements.txt` – Python dependencies required to run the project.
