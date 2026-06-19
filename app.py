@@ -2,13 +2,7 @@ import streamlit as st
 import pandas as pd
 import json
 import time
-from rag_utils import (
-    process_pdf,
-    retrieve_chunks,
-    build_context,
-    generate_answer,
-    judge_answer,
-    )
+from rag_pipeline import (process_pdf,retrieve_chunks,build_context,generate_answer,judge_answer)
 with open("ground_truth.json", "r") as f:
     ground_truth = json.load(f)
 st.title("MiniRAG - MSA Contract Q&A System")
